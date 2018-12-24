@@ -12,3 +12,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.toggler-wrapper{
+  width:100px;
+  height: 50px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 7px;
+  box-sizing: border-box;
+  background-color: #eeeeee;
+  border-radius:30px;
+  cursor: pointer;
+}
+
+.toggler-element{
+  width:35px;
+  height:35px;
+  background-color: #979797;
+  border-radius: 50%;
+}
+
+.toggler-element.toggler-element--active{
+  background-color: #2c9710;
+  margin-left: auto;
+}

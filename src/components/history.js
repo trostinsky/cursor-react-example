@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from "./avatar/avatar.js";
+import Avatar from "./avatar.js";
 
 const History = (props) => {
     return (

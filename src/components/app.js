@@ -1,8 +1,55 @@
 import React from 'react';
-import Post from "./post";
+import Post, {Button} from "./post";
 import History from "./history";
 
-const post1 = {
+class Toggler extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            a: false
+        };
+    }
+
+    // Lifecycle methods...
+
+    render(){
+        const activeClassName = 'toggler-element--active';
+        const a = this.state.a;
+        return (
+            <div>
+                Значение туглера: {a.toString()}
+                <div className="toggler-wrapper" onClick={() => {
+                    // 1 меняем переменную a
+                    // 2 вызываем метод render()
+                    this.setState({
+                        a: !a
+                    });
+                }}>
+                    <div className={`toggler-element ${a ? activeClassName : ""}`}></div>
+                </div>
+            </div>
+        )
+    }
+}
+
+const TogglerOld = () => {
+    let a = true;
+    const activeClassName = 'toggler-element--active';
+    return (
+        <div>
+            Значение туглера: {a.toString()}
+            <div className="toggler-wrapper" onClick={() => {
+                a = false;
+                console.log(a);
+            }}>
+                <div className={`toggler-element ${a ? activeClassName : ""}`}></div>
+            </div>
+        </div>
+    )
+}
+
+const posts = [{
+    id: "1",
     author: {
         avatar: "https://scontent.fiev5-1.fna.fbcdn.net/v/t1.0-1/p200x200/38764140_10156619492092803_3586593735665778688_n.jpg?_nc_cat=106&_nc_ht=scontent.fiev5-1.fna&oh=f3bca9a4765e3a6a5363c6b6c446b729&oe=5C9F7255",
         name: "Игорь Кругленко"
@@ -13,9 +60,8 @@ const post1 = {
                 раньше бомжей с айподами, неплохими мобильными и китайскими портативными ТВ. Но бомжа с Телеграмом
                 встречаю
                 впервые!`
-}
-
-const post2 = {
+}, {
+    id: "2",
     author: {
         avatar: "https://scontent.fiev5-1.fna.fbcdn.net/v/t1.0-1/p200x200/38764140_10156619492092803_3586593735665778688_n.jpg?_nc_cat=106&_nc_ht=scontent.fiev5-1.fna&oh=f3bca9a4765e3a6a5363c6b6c446b729&oe=5C9F7255",
         name: "Игорь Кругленко"
@@ -26,16 +72,15 @@ const post2 = {
                 раньше бомжей с айподами, неплохими мобильными и китайскими портативными ТВ. Но бомжа с Телеграмом
                 встречаю
                 впервые!`
-}
-
-const post3 = {
+}, {
+    id: "3",
     author: {
         avatar: "https://scontent.fiev5-1.fna.fbcdn.net/v/t1.0-1/p160x160/20293039_1819179981726380_5425299224858583648_n.jpg?_nc_cat=108&_nc_ht=scontent.fiev5-1.fna&oh=b7716e3ac943a2c1a243abdeb53d13a7&oe=5C9056F0",
         name: "Влад Реактов"
     },
     date: "Сегодня в 18:35",
     content: `Супер мотивирующий пост!`
-}
+}];
 
 const history = {
     name: "Yulia Hudyma-Smetanska",
@@ -46,22 +91,28 @@ const history = {
 const App = () => {
     return (
         <div>
+            <Toggler/>
             <h1>Facebook better clone!</h1>
-            <Post author={post1.author} date={post1.date}>
-                {post1.content}
-            </Post>
-            <Post author={post2.author} date={post2.date}>
-                {post2.content}
-            </Post>
-            <Post author={post3.author} date={post3.date}>
-                {post3.content}
-            </Post>
+            <Button width={(400 - 100) * 0.75}>Like!</Button>
+            {
+                posts.map((post, index) => {
+                    return (
+                        <Post id={post.id}
+                              author={post.author}
+                              date={post.date}
+                              key={index}
+                        >
+                            {post.content}
+                        </Post>
+                    )
+                })
+            }
+
             <History
                 name={history.name}
                 time={history.time}
                 avatar={history.avatar}
             />
-            <iframe width="200" height="150" src="https://www.youtube.com/embed/5WnaT1oFjt8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     )
 }
