@@ -1,6 +1,7 @@
 import React from 'react';
 import Post, {Button} from "./post";
 import History from "./history";
+import SignUp from "./signUp";
 
 class Toggler extends React.Component{
     constructor(props){
@@ -91,28 +92,7 @@ const history = {
 const App = () => {
     return (
         <div>
-            <Toggler/>
-            <h1>Facebook better clone!</h1>
-            <Button width={(400 - 100) * 0.75}>Like!</Button>
-            {
-                posts.map((post, index) => {
-                    return (
-                        <Post id={post.id}
-                              author={post.author}
-                              date={post.date}
-                              key={index}
-                        >
-                            {post.content}
-                        </Post>
-                    )
-                })
-            }
-
-            <History
-                name={history.name}
-                time={history.time}
-                avatar={history.avatar}
-            />
+            <SignUp test={10500}/>
         </div>
     )
 }
